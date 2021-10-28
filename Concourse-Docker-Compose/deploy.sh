@@ -19,8 +19,9 @@ then
     echo "You can manually install Docker on MAC by going to https://docs.docker.com/desktop/mac/install/"
     echo "Testing if the docker install is good"
     docker version
-    echo "Installing Docker Compose version 1.23.2"
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    echo "Installing the latest version of Docker Compose"
+    brew install docker-compose
+    #sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
     docker-compose --version
 
