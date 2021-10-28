@@ -27,7 +27,7 @@ then
     echo "=================================================="
     echo "Running Concourse"
     echo "=================================================="
-    curl -l https://raw.githubusercontent.com/Hermen-Nicolau/Concoure-deployment-scripts/main/Concourse-Docker-Compose/docker-compose-raw.yml > docker-compose.yml
+    curl -l https://raw.githubusercontent.com/Hermen-Nicolau/Concourse-deployment-scripts/main/Concourse-Docker-Compose/docker-compose-raw.yml > docker-compose.yml
     ipaddr=$(ipconfig getifaddr en0)
     sed "s|EXTERNAL_URL=|EXTERNAL_URL=http://$ipaddr:8080|g" docker-compose.yml >> temp.txt && mv temp.txt docker-compose.yml
     docker-compose up -d
