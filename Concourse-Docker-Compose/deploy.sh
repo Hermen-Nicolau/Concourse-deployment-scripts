@@ -39,7 +39,7 @@ then
     echo "=================================================="
     echo "=================================================="
     echo "                                                  "
-    echo "Use the URL http://"$ipaddr":8080 to access the concourse Web UI. The default username/password is docker/playground When done please use the command:"
+    echo "Use the URL http://"$ipaddr":8080 to access the concourse Web UI. The default username/password is docker/play When done please use the command:"
     echo "docker-compose down"
     echo "to delete the two containers gracefully"
     echo "                                                  "
