@@ -18,7 +18,7 @@ then
     echo "You selected MAC as your OS"
     echo "You can manually install Docker on MAC by going to https://docs.docker.com/desktop/mac/install/"
     echo "Testing if the docker install is good"
-    sudo docker run hello-world
+    docker version
     echo "Installing Docker Compose version 1.23.2"
     sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
@@ -26,10 +26,14 @@ then
 
     echo "=================================================="
     echo "Running Concourse"
-    wget -O docker-compose.yml https://gitlab.com/snippets/1864804/raw docker-compose.yml
+    echo "=================================================="
+    curl -l https://gitlab.com/snippets/1864804/raw > docker-compose.yml
     ipaddr=$(ipconfig getifaddr en0)
-    echo "$ipaddr"
-    #sed "s|EXTERNAL_URL|EXTERNAL_URL=http://$ipaddr:8080|g" docker-compose.yml -i
+    sed "s|EXTERNAL_URL=|EXTERNAL_URL=http://$ipaddr:8080|g" docker-compose.yml
+    docker-compose up -d
+    docker ps
+    cat docker-compose.yml |grep EXTERNAL_URL | sed -e 's/^[[:space:]]*- //'
+
 
 else
     echo "You did NOT select a valid OS for this script. Please run the script again and select either Ubuntu or MAC"
