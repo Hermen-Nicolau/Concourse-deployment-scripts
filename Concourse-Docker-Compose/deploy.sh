@@ -27,12 +27,23 @@ then
     echo "=================================================="
     echo "Running Concourse"
     echo "=================================================="
-    curl -l https://gitlab.com/snippets/1864804/raw > docker-compose.yml
+    curl -l https://raw.githubusercontent.com/Hermen-Nicolau/Concoure-deployment-scripts/main/Concourse-Docker-Compose/docker-compose-raw.yml > docker-compose.yml
     ipaddr=$(ipconfig getifaddr en0)
-    sed "s|EXTERNAL_URL=|EXTERNAL_URL=http://$ipaddr:8080|g" docker-compose.yml
+    sed "s|EXTERNAL_URL=|EXTERNAL_URL=http://$ipaddr:8080|g" docker-compose.yml >> temp.txt && mv temp.txt docker-compose.yml
     docker-compose up -d
     docker ps
     cat docker-compose.yml |grep EXTERNAL_URL | sed -e 's/^[[:space:]]*- //'
+
+
+    echo "=================================================="
+    echo "=================================================="
+    echo "                                                  "
+    echo "Use the URL http://"$ipaddr":8080 to access the concourse Web UI. The default username/password is docker/playground When done please use the command:"
+    echo "docker-compose down"
+    echo "to delete the two containers gracefully"
+    echo "                                                  "
+    echo "=================================================="
+    echo "=================================================="
 
 
 else
