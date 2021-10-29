@@ -13,11 +13,11 @@ if [ "$operatingS" == "Ubuntu" ]
 then
     echo "You selected Ubuntu as your OS"
     echo "Installing the Docker engine on Ubuntu"
-    sudo apt-get update
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh get-docker.sh
-    echo "Testing if the docker installation is good"
-    docker version
+    # sudo apt-get update
+    # curl -fsSL https://get.docker.com -o get-docker.sh
+    # sudo sh get-docker.sh
+    # echo "Testing if the docker installation is good"
+    # docker version
 
 elif [ "$operatingS" == MAC ]
 then
