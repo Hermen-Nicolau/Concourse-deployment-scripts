@@ -12,12 +12,18 @@ read -p "What is your operating system [Ubuntu or MAC]:" operatingS
 if [ "$operatingS" == "Ubuntu" ]
 then
     echo "You selected Ubuntu as your OS"
+    echo "Installing the Docker engine on Ubuntu"
+    sudo apt-get update
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+    echo "Testing if the docker installation is good"
+    docker version
 
 elif [ "$operatingS" == MAC ]
 then
     echo "You selected MAC as your OS"
     echo "You can manually install Docker on MAC by going to https://docs.docker.com/desktop/mac/install/"
-    echo "Testing if the docker install is good"
+    echo "Testing if the docker installation is good"
     docker version
     echo "Installing the latest version of Docker Compose"
     brew install docker-compose
