@@ -18,7 +18,32 @@ then
     sudo sh get-docker.sh
     sudo service docker start
     echo "Testing if the docker installation is good"
-    docker version
+    sudo docker version
+
+    echo "=================================================="
+    echo "Running Concourse"
+    echo "=================================================="
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose    
+    sudo chmod +x /usr/local/bin/docker-compose
+    sudo docker-compose --version
+    wget -O docker-compose.yml https://raw.githubusercontent.com/Hermen-Nicolau/Concourse-deployment-scripts/main/Concourse-Docker-Compose/docker-compose-raw.yml docker-compose.yml
+    ipaddr=$(ip route get 1 | awk '{print $NF;exit}')
+    sed "s|EXTERNAL_URL=|EXTERNAL_URL=http://$ipaddr:8080|g" docker-compose.yml -i
+    
+    sudo docker-compose up -d
+    sudo docker ps # Shows your running Docker containers
+    cat docker-compose.yml |grep EXTERNAL_URL | sed -e 's/^[[:space:]]*- //'
+
+
+    echo "=================================================="
+    echo "=================================================="
+    echo "                                                  "
+    echo "Use the URL http://"$ipaddr":8080 to access the concourse Web UI. The default username/password is docker/play When done please use the command:"
+    echo "docker-compose down"
+    echo "to delete the two containers gracefully"
+    echo "                                                  "
+    echo "=================================================="
+    echo "=================================================="
 
 elif [ "$operatingS" == MAC ]
 then
